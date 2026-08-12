@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackettstown News</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta http-equiv="refresh" content="600">
+</head>
+<body>
+  <header>
+    <h1>Hackettstown, NJ &mdash; News</h1>
+    <div class="meta-row">
+      <span>Last updated: {{ last_run }}</span>
+      <form action="{{ url_for('refresh') }}" method="post">
+        <button type="submit">Refresh now</button>
+      </form>
+    </div>
+  </header>
+
+  <main>
+    {% if not articles %}
+      <p class="empty">No articles yet. Click "Refresh now" or wait for the next scheduled fetch.</p>
+    {% endif %}
+    {% for a in articles %}
+      <article class="card">
+        <div class="card-meta">
+          <span class="source">{{ a['source'] }}</span>
+          <span class="date">{{ format_date(a['published'] or a['first_seen']) }}</span>
+        </div>
+        <h2><a href="{{ a['url'] }}" target="_blank" rel="noopener">{{ a['title'] }}</a></h2>
+        {% if a['description'] %}
+          <p class="desc">{{ a['description'] }}</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </main>
+</body>
+</html>

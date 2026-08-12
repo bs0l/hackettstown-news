@@ -1,0 +1,18 @@
+services:
+  hackettstown-news:
+    build: .
+    container_name: hackettstown-news
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - hackettstown-news-data:/data
+    environment:
+      - FETCH_INTERVAL_MINUTES=30
+    labels:
+      # Skip this one on Watchtower auto-update sweeps since it's a
+      # locally-built image, not something to pull from a registry.
+      - "com.centurylinklabs.watchtower.enable=false"
+
+volumes:
+  hackettstown-news-data:

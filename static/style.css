@@ -1,8 +1,22 @@
 :root {
   color-scheme: light dark;
+  --bg: #ffffff;
+  --text: #1a1a1a;
   --border: #d8d8d8;
   --muted: #6b6b6b;
   --accent: #1b5e20;
+  --card-hover: rgba(0, 0, 0, 0.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181a;
+    --text: #e8e8e8;
+    --border: #34383c;
+    --muted: #9a9a9a;
+    --accent: #4caf50;
+    --card-hover: rgba(255, 255, 255, 0.03);
+  }
 }
 
 body {
@@ -11,6 +25,8 @@ body {
   margin: 0 auto;
   padding: 1rem 1rem 3rem;
   line-height: 1.4;
+  background: var(--bg);
+  color: var(--text);
 }
 
 header {
@@ -50,6 +66,11 @@ button:hover {
 .card {
   border-bottom: 1px solid var(--border);
   padding: 0.9rem 0;
+  border-radius: 4px;
+}
+
+.card:hover {
+  background: var(--card-hover);
 }
 
 .card-meta {
@@ -78,7 +99,8 @@ button:hover {
 
 .desc {
   margin: 0;
-  color: #333;
+  color: var(--text);
+  opacity: 0.85;
   font-size: 0.92rem;
 }
 
